@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: WillBaber
+  datasource:
+    url: jdbc:postgresql://localhost:5432/willbarber
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgressql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: upadte
