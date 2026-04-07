@@ -35,6 +35,7 @@ public class UsersFactory {
                 }
                     return barbeiro;
 
+
             case GESTOR:
                 return new Gestor(dto.nome(), dto.email(), dto.senha(), dto.cpf());
 

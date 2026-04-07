@@ -1,9 +1,6 @@
 package projetoBarbearia.WillBaber.domain.horarioTrabalho;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import projetoBarbearia.WillBaber.domain.barbeiro.Barbeiro;
@@ -17,7 +14,8 @@ import java.time.LocalTime;
 @Table(name = "horario_trabalho")
 public class HorarioTrabalho {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private DayOfWeek diaSemana;
