@@ -14,4 +14,6 @@ public class UsuarioService {
     public Users criarUsuario(Users users){
         return usuarioRepository.save(users);
     }
+
+
 }

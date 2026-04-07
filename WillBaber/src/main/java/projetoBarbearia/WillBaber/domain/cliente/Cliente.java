@@ -4,6 +4,7 @@ package projetoBarbearia.WillBaber.domain.cliente;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import projetoBarbearia.WillBaber.domain.users.TipoUsers;
 import projetoBarbearia.WillBaber.domain.users.Users;
 
 
@@ -19,7 +20,7 @@ public class Cliente extends Users {
     }
 
     @Override
-    public String getTipo() {
-        return "CLIENTE";
+    public TipoUsers getTipo() {
+        return TipoUsers.CLIENTE;
     }
 }

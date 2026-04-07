@@ -30,5 +30,5 @@ public abstract class Users {
 
     }
 
-    public abstract String getTipo();
+    public abstract TipoUsers getTipo();
 }

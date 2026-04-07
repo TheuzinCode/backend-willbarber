@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import projetoBarbearia.WillBaber.domain.horarioTrabalho.HorarioTrabalho;
+import projetoBarbearia.WillBaber.domain.users.TipoUsers;
 import projetoBarbearia.WillBaber.domain.users.Users;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class Barbeiro extends Users {
 
 
     @Override
-    public String getTipo() {
-        return "BARBEIRO";
+    public TipoUsers getTipo() {
+        return TipoUsers.BARBEIRO;
     }
 
     @OneToMany(mappedBy = "barbeiro", cascade = CascadeType.ALL)

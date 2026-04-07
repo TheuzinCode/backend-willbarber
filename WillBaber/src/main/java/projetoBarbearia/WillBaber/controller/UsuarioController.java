@@ -12,20 +12,21 @@ import projetoBarbearia.WillBaber.domain.users.dto.UsersDTO;
 import projetoBarbearia.WillBaber.service.UsuarioService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/willbarber")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
 
 
-    @PostMapping("criarUsuario")
+    @PostMapping("/criarUsuario")
     public ResponseEntity<Users>criarUsuario(@RequestBody UsersDTO usersDTO){
         try{
             var entity = UsersFactory.criarUsuario(usersDTO);
             usuarioService.criarUsuario(entity);
+            ResponseEntity.status(201).build();
         }catch (Exception e){
-            System.out.println("erro ao criar um usuario" + e);
+            ResponseEntity.status(500).build();
         }
         return ResponseEntity.ok().build();
     }
