@@ -19,6 +19,10 @@ public class Cliente extends Users {
         super(nome, email, senha, cpf);
     }
 
+    public Cliente(){
+
+    }
+
     @Override
     public TipoUsers getTipo() {
         return TipoUsers.CLIENTE;

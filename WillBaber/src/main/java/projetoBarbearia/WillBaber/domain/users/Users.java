@@ -11,6 +11,8 @@ import lombok.Setter;
 @Setter
 public abstract class Users {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
@@ -18,6 +20,9 @@ public abstract class Users {
     protected String email;
     protected String senha;
     protected String cpf;
+
+    @Enumerated(EnumType.STRING)
+    protected TipoUsers tipo;
 
     public Users(String nome, String email, String senha, String cpf) {
         this.nome = nome;
@@ -30,5 +35,4 @@ public abstract class Users {
 
     }
 
-    public abstract TipoUsers getTipo();
 }
