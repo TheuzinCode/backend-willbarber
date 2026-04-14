@@ -25,8 +25,6 @@ public class Barbeiro extends Users {
         super(nome, email, senha, cpf);
     }
 
-
-
     @Override
     public TipoUsers getTipo() {
         return TipoUsers.BARBEIRO;

@@ -14,10 +14,14 @@ import projetoBarbearia.WillBaber.domain.users.Users;
 @Table(name = "Cliente")
 public class Cliente extends Users {
 
+    private Integer Pontos;
 
-    public Cliente(String nome, String email, String senha, String cpf) {
+    public Cliente(String nome, String email, String senha, String cpf, Integer pontos) {
+        this.Pontos = pontos;
         super(nome, email, senha, cpf);
     }
+
+
 
     public Cliente(){
 

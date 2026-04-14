@@ -15,7 +15,7 @@ public class UsersFactory {
 
         switch (dto.tipo()){
             case CLIENTE:
-                return new Cliente(dto.nome(), dto.email(), dto.senha(), dto.cpf());
+                return new Cliente(dto.nome(), dto.email(), dto.senha(), dto.cpf(), 0);
 
             case BARBEIRO:
                  Barbeiro barbeiro = new Barbeiro(dto.nome(),dto.email(), dto.senha(), dto.cpf());
