@@ -1,6 +1,7 @@
 package projetoBarbearia.WillBaber.domain.cliente;
 
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,10 +15,11 @@ import projetoBarbearia.WillBaber.domain.users.Users;
 @Table(name = "Cliente")
 public class Cliente extends Users {
 
-    private Integer Pontos;
+    @JsonAlias({"Pontos", "pontos"})
+    private Integer pontos;
 
     public Cliente(String nome, String email, String senha, String cpf, Integer pontos) {
-        this.Pontos = pontos;
+        this.pontos= pontos;
         super(nome, email, senha, cpf);
     }
 

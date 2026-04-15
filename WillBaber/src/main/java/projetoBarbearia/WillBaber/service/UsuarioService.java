@@ -43,5 +43,8 @@ public class UsuarioService {
                 .toList();
     }
 
+    public Optional<Users> buscarUsuarioPorId(Long id){
+        return usuarioRepository.findById(id);
+    }
 
 }

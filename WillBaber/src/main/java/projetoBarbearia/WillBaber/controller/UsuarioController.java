@@ -10,6 +10,7 @@ import projetoBarbearia.WillBaber.domain.users.dto.UsersDTO;
 import projetoBarbearia.WillBaber.service.UsuarioService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/willbarber")
@@ -29,5 +30,17 @@ public class UsuarioController {
     @GetMapping("/listarTodos")
     public ResponseEntity<List<UsersDTO>>ListarTodos(){
         return ResponseEntity.ok(usuarioService.listarAll());
+    }
+
+
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<Users> buscarPorId(@PathVariable Long id){
+        Optional<Users> entityUsuario = usuarioService.buscarUsuarioPorId(id);
+
+        if (entityUsuario.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(entityUsuario.get());
     }
 }

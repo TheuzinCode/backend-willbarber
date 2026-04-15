@@ -1,5 +1,6 @@
 package projetoBarbearia.WillBaber.domain.barbeiro;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -31,6 +32,7 @@ public class Barbeiro extends Users {
     }
 
     @OneToMany(mappedBy = "barbeiro", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<HorarioTrabalho> horarios;
 
     public void setHorarios(List<HorarioTrabalho> horarios) {

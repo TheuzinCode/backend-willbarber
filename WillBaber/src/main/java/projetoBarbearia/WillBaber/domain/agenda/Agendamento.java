@@ -41,12 +41,10 @@ public class Agendamento {
 
     @ManyToOne
     @JoinColumn(name = "barbeiro_id")
-    @JsonIgnore
     private Barbeiro barbeiro;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
-    @JsonIgnore
     private Cliente cliente;
 
     @ManyToOne
