@@ -25,4 +25,11 @@ public class BarbeiroController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data) {
         return barbeiroService.listarHorariosDisponiveis(barbeiroId, data);
     }
+
+
+
+    //TODO
+    //LISTAR TODOS AGENDAMENTOS
+    //EDITAR PERFIL
+    //AGENDA DA SEMANA
 }

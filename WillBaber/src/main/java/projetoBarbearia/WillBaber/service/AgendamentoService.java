@@ -7,6 +7,7 @@ import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
 import projetoBarbearia.WillBaber.domain.barbeiro.Barbeiro;
 import projetoBarbearia.WillBaber.domain.cliente.Cliente;
 import projetoBarbearia.WillBaber.domain.horarioTrabalho.HorarioTrabalho;
+import projetoBarbearia.WillBaber.domain.statusAgendamento.StatusAgendamento;
 import projetoBarbearia.WillBaber.exception.BusinessException;
 import projetoBarbearia.WillBaber.repositories.AgendamentoRepository;
 import projetoBarbearia.WillBaber.repositories.BarbeiroRepository;
@@ -42,8 +43,30 @@ public class AgendamentoService {
 
         agendamento.setBarbeiro(barbeiro);
         agendamento.setCliente(cliente);
+        agendamento.setStatus(StatusAgendamento.AGENDADO);
 
         return agendamentoRepository.save(agendamento);
+    }
+
+    public void atualizarStatus(Long id, StatusAgendamento statusAgendamento) {
+        Agendamento agendamento = agendamentoRepository.findById(id)
+                .orElseThrow(() -> new BusinessException("agendamento não encontrado"));
+
+        if (statusAgendamento == null) {
+            throw new BusinessException("status do agendamento vazio");
+        }
+
+        if (statusAgendamento == StatusAgendamento.FINALIZADO) {
+
+            int pontosServico = agendamento.getServico().getPontos();
+            agendamento.getCliente().setPontos(
+                    agendamento.getCliente().getPontos() + pontosServico);
+        }
+
+        agendamento.setStatus(statusAgendamento);
+        agendamentoRepository.save(agendamento);
+
+
     }
 
 }
