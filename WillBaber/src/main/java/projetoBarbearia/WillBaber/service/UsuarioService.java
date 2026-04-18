@@ -21,7 +21,7 @@ public class UsuarioService {
     public Users criarUsuario(Users users){
 
         Optional<Users> existeCpf =  usuarioRepository.findByCpf(users.getCpf());
-        List<Users> existeEmail = usuarioRepository.findByEmail(users.getEmail());
+        Optional<Users> existeEmail = usuarioRepository.findByEmail(users.getEmail());
 
         if (existeCpf.isPresent()) {
             System.out.println("CPF CADASTRADO");
