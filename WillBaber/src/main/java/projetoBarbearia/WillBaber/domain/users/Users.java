@@ -20,15 +20,17 @@ public abstract class Users {
     protected String email;
     protected String senha;
     protected String cpf;
+    protected String numero;
 
     @Enumerated(EnumType.STRING)
     protected TipoUsers tipo;
 
-    public Users(String nome, String email, String senha, String cpf) {
+    public Users(String nome, String email, String senha, String cpf, String numero) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.cpf = cpf;
+        this.numero = numero;
     }
 
     public Users() {

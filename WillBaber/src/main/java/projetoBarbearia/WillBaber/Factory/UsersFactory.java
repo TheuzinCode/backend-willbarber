@@ -15,10 +15,10 @@ public class UsersFactory {
 
         switch (dto.tipo()){
             case CLIENTE:
-                return new Cliente(dto.nome(), dto.email(), dto.senha(), dto.cpf(), 0);
+                return new Cliente(dto.nome(), dto.email(), dto.senha(), dto.cpf(), dto.numero(), 0);
 
             case BARBEIRO:
-                 Barbeiro barbeiro = new Barbeiro(dto.nome(),dto.email(), dto.senha(), dto.cpf());
+                 Barbeiro barbeiro = new Barbeiro(dto.nome(),dto.email(), dto.senha(), dto.cpf(), dto.numero());
                 if (dto.horarios() != null) {
                     List<HorarioTrabalho> horarios = dto.horarios().stream()
                             .map(h -> {
@@ -37,7 +37,7 @@ public class UsersFactory {
 
 
             case GESTOR:
-                return new Gestor(dto.nome(), dto.email(), dto.senha(), dto.cpf());
+                return new Gestor(dto.nome(), dto.email(), dto.senha(), dto.cpf(), dto.numero());
 
             default:
                 throw new IllegalArgumentException("Tipo inválido");

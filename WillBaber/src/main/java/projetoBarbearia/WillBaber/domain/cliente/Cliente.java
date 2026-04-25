@@ -18,9 +18,9 @@ public class Cliente extends Users {
     @JsonAlias({"Pontos", "pontos"})
     private Integer pontos;
 
-    public Cliente(String nome, String email, String senha, String cpf, Integer pontos) {
+    public Cliente(String nome, String email, String senha, String cpf, String numero ,Integer pontos) {
         this.pontos= pontos;
-        super(nome, email, senha, cpf);
+        super(nome, email, senha, cpf, numero);
     }
 
 

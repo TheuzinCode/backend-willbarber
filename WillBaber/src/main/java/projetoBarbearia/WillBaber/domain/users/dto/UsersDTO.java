@@ -12,6 +12,7 @@ public record UsersDTO(
         String email,
         String senha,
         String cpf,
+        String numero,
         TipoUsers tipo,
         List<HorarioTrabalhoDTO> horarios
 
@@ -30,6 +31,7 @@ public record UsersDTO(
                 users.getEmail(),
                 users.getSenha(),
                 users.getCpf(),
+                users.getNumero(),
                 users.getTipo(),
                 horarioDTO
         );

@@ -17,8 +17,8 @@ public class Gestor extends Users {
     public Gestor() {
     }
 
-    public Gestor(String nome, String email, String senha, String cpf){
-        super(nome, email, senha, cpf);
+    public Gestor(String nome, String email, String senha, String cpf, String numero){
+        super(nome, email, senha, cpf, numero);
     }
 
     @Override
