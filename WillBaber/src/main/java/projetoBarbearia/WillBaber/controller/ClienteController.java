@@ -21,8 +21,16 @@ public class ClienteController {
     @GetMapping("/{id}/meus-agendamentos")
     public ResponseEntity<List<AgendamentoResponseCliente>> listarAgendamentosCliente(
             @PathVariable Long id){
-        return ResponseEntity.ok(clienteService.listarTodos(id));
+        return ResponseEntity.ok(clienteService.listarAgendados(id));
     }
+
+    @GetMapping("/{id}/meus-agendamentos-concluidos")
+    public ResponseEntity<List<AgendamentoResponseCliente>> listarHistorico(
+            @PathVariable Long id){
+        return ResponseEntity.ok(clienteService.listarConcluidos(id));
+    }
+
+
 
     //TODO
     //AGEDAMENTO ATIVOS

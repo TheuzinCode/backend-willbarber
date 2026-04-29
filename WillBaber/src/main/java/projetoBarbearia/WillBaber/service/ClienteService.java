@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
 import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseCliente;
+import projetoBarbearia.WillBaber.domain.statusAgendamento.StatusAgendamento;
 import projetoBarbearia.WillBaber.repositories.AgendamentoRepository;
 import projetoBarbearia.WillBaber.repositories.BarbeiroRepository;
 import projetoBarbearia.WillBaber.repositories.ClienteRepository;
@@ -38,4 +39,42 @@ public class ClienteService {
                 .toList();
 
     }
+
+    public List<AgendamentoResponseCliente> listarAgendados(Long id){
+
+        List<Agendamento> agendamentos =
+                agendamentoRepository.findByClienteIdAndStatus(id, StatusAgendamento.AGENDADO);
+
+        return agendamentos.stream()
+                .map(agendamento -> new AgendamentoResponseCliente(
+                        agendamento.getId(),
+                        agendamento.getServico().getNomeServico(),
+                        agendamento.getBarbeiro().getNome(),
+                        agendamento.getServico().getPreco(),
+                        agendamento.getDataHora(),
+                        agendamento.getStatus()
+                ))
+                .toList();
+    }
+
+    public List<AgendamentoResponseCliente> listarConcluidos(Long id){
+
+        List<Agendamento> agendamentos =
+                agendamentoRepository.findByClienteIdAndStatus(id, StatusAgendamento.FINALIZADO);
+
+        return agendamentos.stream()
+                .map(agendamento -> new AgendamentoResponseCliente(
+                        agendamento.getId(),
+                        agendamento.getServico().getNomeServico(),
+                        agendamento.getBarbeiro().getNome(),
+                        agendamento.getServico().getPreco(),
+                        agendamento.getDataHora(),
+                        agendamento.getStatus()
+                ))
+                .toList();
+    }
+
+
+
+
 }
