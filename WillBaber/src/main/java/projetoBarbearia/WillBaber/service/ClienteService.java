@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
 import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseCliente;
+import projetoBarbearia.WillBaber.domain.cliente.Cliente;
+import projetoBarbearia.WillBaber.domain.cliente.dto.ClienteResponseDTO;
 import projetoBarbearia.WillBaber.domain.statusAgendamento.StatusAgendamento;
+import projetoBarbearia.WillBaber.exception.BusinessException;
 import projetoBarbearia.WillBaber.repositories.AgendamentoRepository;
 import projetoBarbearia.WillBaber.repositories.BarbeiroRepository;
 import projetoBarbearia.WillBaber.repositories.ClienteRepository;
@@ -72,6 +75,20 @@ public class ClienteService {
                         agendamento.getStatus()
                 ))
                 .toList();
+    }
+
+    public ClienteResponseDTO buscarCliente(Long id){
+
+        Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new BusinessException("usuario não encontrado"));
+
+        return new ClienteResponseDTO(
+                cliente.getId(),
+                cliente.getNome(),
+                cliente.getEmail(),
+                cliente.getNumero(),
+                cliente.getCpf(),
+                cliente.getSenha()
+        ) ;
     }
 
 
