@@ -12,6 +12,7 @@ import projetoBarbearia.WillBaber.service.UsuarioService;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/willbarber")
 public class UsuarioController {

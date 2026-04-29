@@ -2,18 +2,18 @@ package projetoBarbearia.WillBaber.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import projetoBarbearia.WillBaber.domain.barbeiro.dto.BarbeiroResponseDTO;
 import projetoBarbearia.WillBaber.service.BarbeiroService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
-@RequestMapping("/agendamento")
+@RequestMapping("/willbarber/agendamento")
 public class BarbeiroController {
 
     @Autowired
@@ -25,6 +25,13 @@ public class BarbeiroController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data) {
         return barbeiroService.listarHorariosDisponiveis(barbeiroId, data);
     }
+
+    @GetMapping("/listar-todos-barbeiros")
+    public ResponseEntity<List<BarbeiroResponseDTO>> listarTodosBarbeiro(){
+        return ResponseEntity.ok(barbeiroService.listarAll());
+    }
+
+
 
 
 

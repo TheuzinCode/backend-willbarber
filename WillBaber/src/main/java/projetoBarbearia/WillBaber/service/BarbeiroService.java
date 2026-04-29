@@ -3,7 +3,9 @@ package projetoBarbearia.WillBaber.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
+import projetoBarbearia.WillBaber.domain.barbeiro.dto.BarbeiroResponseDTO;
 import projetoBarbearia.WillBaber.repositories.AgendamentoRepository;
+import projetoBarbearia.WillBaber.repositories.BarbeiroRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +14,9 @@ import java.util.List;
 
 @Service
 public class BarbeiroService {
+
+    @Autowired
+    private BarbeiroRepository barbeiroRepository;
 
     @Autowired
     private AgendamentoRepository agendamentoRepository;
@@ -45,5 +50,14 @@ public class BarbeiroService {
         }
 
         return disponiveis;
+    }
+
+    public List<BarbeiroResponseDTO> listarAll(){
+         return barbeiroRepository.findAll().stream()
+                 .map(barbeiro -> new BarbeiroResponseDTO(
+                         barbeiro.getId(),
+                         barbeiro.getNome()
+                 ))
+                 .toList();
     }
 }
