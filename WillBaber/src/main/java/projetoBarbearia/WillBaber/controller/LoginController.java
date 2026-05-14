@@ -21,10 +21,7 @@ public class LoginController {
     @PostMapping("/entrar")
     public ResponseEntity<?> realizarLogin(@RequestBody LoginRequestDTO loginDTO){
         var validarLogin = loginService.verificarLogin(loginDTO);
-        return ResponseEntity.ok(new LoginResponseDTO(
-                validarLogin.getId(),
-                validarLogin.getNome(),
-                validarLogin.getEmail()));
+        return ResponseEntity.ok(validarLogin);
     }
 
 }

@@ -13,25 +13,23 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/willbarber/agendamento")
+@RequestMapping("/willbarber")
 public class BarbeiroController {
 
     @Autowired
     private BarbeiroService barbeiroService;
 
-    @GetMapping("/horarios-disponiveis")
+    @GetMapping("/agendamento/horarios-disponiveis")
     public List<LocalDateTime> listarHorariosBarbeiro(
             @RequestParam Long barbeiroId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data) {
         return barbeiroService.listarHorariosDisponiveis(barbeiroId, data);
     }
 
-    @GetMapping("/listar-todos-barbeiros")
+    @GetMapping("/agendamento/listar-todos-barbeiros")
     public ResponseEntity<List<BarbeiroResponseDTO>> listarTodosBarbeiro(){
         return ResponseEntity.ok(barbeiroService.listarAll());
     }
-
-
 
 
 

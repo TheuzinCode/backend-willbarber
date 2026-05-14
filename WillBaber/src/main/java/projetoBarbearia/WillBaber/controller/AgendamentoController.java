@@ -8,6 +8,7 @@ import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
 import projetoBarbearia.WillBaber.domain.statusAgendamento.StatusAgendamento;
 import projetoBarbearia.WillBaber.service.AgendamentoService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/willbarber/agendamento")
 @AllArgsConstructor
