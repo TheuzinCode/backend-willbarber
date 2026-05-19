@@ -31,4 +31,7 @@ public class ServicoService {
         var optServico = servicoRepository.findById(id).orElseThrow(() -> new BusinessException("Servico não encontrado"));
         return ServicoRequestDTO.toDTO(optServico);
     }
+
+
+
 }

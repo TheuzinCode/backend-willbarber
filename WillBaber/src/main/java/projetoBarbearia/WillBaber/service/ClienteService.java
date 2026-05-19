@@ -37,7 +37,8 @@ public class ClienteService {
                         agendamento.getBarbeiro().getNome(),
                         agendamento.getServico().getPreco(),
                         agendamento.getDataHora(),
-                        agendamento.getStatus()
+                        agendamento.getStatus(),
+                        agendamento.getPontos()
                 ))
                 .toList();
 
@@ -55,7 +56,8 @@ public class ClienteService {
                         agendamento.getBarbeiro().getNome(),
                         agendamento.getServico().getPreco(),
                         agendamento.getDataHora(),
-                        agendamento.getStatus()
+                        agendamento.getStatus(),
+                        agendamento.getPontos()
                 ))
                 .toList();
     }
@@ -72,7 +74,9 @@ public class ClienteService {
                         agendamento.getBarbeiro().getNome(),
                         agendamento.getServico().getPreco(),
                         agendamento.getDataHora(),
-                        agendamento.getStatus()
+                        agendamento.getStatus(),
+                        agendamento.getPontos()
+
                 ))
                 .toList();
     }
@@ -87,10 +91,24 @@ public class ClienteService {
                 cliente.getEmail(),
                 cliente.getNumero(),
                 cliente.getCpf(),
-                cliente.getSenha()
+                cliente.getSenha(),
+                cliente.getPontos()
         ) ;
     }
 
+    public List<ClienteResponseDTO> listarTodosClientes(){
+        List<Cliente> clientes = clienteRepository.findAll();
+        return clientes.stream()
+                .map(cliente -> new ClienteResponseDTO(
+                        cliente.getId(),
+                        cliente.getNome(),
+                        cliente.getEmail(),
+                        cliente.getNumero(),
+                        cliente.getCpf(),
+                        cliente.getSenha(),
+                        cliente.getPontos()
+                )).toList();
+    }
 
 
 

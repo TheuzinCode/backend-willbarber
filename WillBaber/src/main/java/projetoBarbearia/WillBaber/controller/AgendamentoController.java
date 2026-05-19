@@ -17,17 +17,16 @@ public class AgendamentoController {
     private AgendamentoService agendamentoService;
 
     @PostMapping("/novoagendamento")
-    public ResponseEntity<Agendamento> criarAgendamento(@RequestBody Agendamento agendamento){
+    public ResponseEntity<Agendamento> criarAgendamento(@RequestBody Agendamento agendamento) {
         Agendamento novoAgendamento = agendamentoService.salvarAgendamento(agendamento);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoAgendamento);
     }
 
-
-
-
     @PutMapping("agendamentos/{id}")
-    public ResponseEntity<?> alterarStatusAgendamento(@PathVariable Long id, @RequestBody StatusAgendamento statusAgendamento){
+    public ResponseEntity<?> alterarStatusAgendamento(@PathVariable Long id, @RequestBody StatusAgendamento statusAgendamento) {
         agendamentoService.atualizarStatus(id, statusAgendamento);
         return ResponseEntity.ok().build();
     }
+
+
 }

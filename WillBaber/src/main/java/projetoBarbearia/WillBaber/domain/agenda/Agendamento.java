@@ -51,13 +51,16 @@ public class Agendamento {
     @JoinColumn(name = "servico_id")
     private Servico servico;
 
-    public Agendamento(LocalDateTime dataHora, BigDecimal preco, StatusAgendamento status, Barbeiro barbeiro, Cliente cliente, Servico servico) {
+    private Integer pontos;
+
+    public Agendamento(LocalDateTime dataHora, BigDecimal preco, StatusAgendamento status, Barbeiro barbeiro, Cliente cliente, Servico servico, Integer pontos) {
         this.dataHora = dataHora;
         this.preco = preco;
         this.status = status;
         this.barbeiro = barbeiro;
         this.cliente = cliente;
         this.servico = servico;
+        this.pontos = pontos;
     }
 
     public Agendamento() {

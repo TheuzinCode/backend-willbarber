@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
+import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseGestor;
 import projetoBarbearia.WillBaber.domain.barbeiro.Barbeiro;
 import projetoBarbearia.WillBaber.domain.cliente.Cliente;
 import projetoBarbearia.WillBaber.domain.horarioTrabalho.HorarioTrabalho;
@@ -26,6 +27,8 @@ public class AgendamentoService {
     private BarbeiroRepository barbeiroRepository;
     private HorarioTabalhoRepository horarioTrabalhoRepository;
 
+
+    //SALVAR O AGENDAMENTO
     public Agendamento salvarAgendamento(Agendamento agendamento) {
 
         Cliente cliente = clienteRepository.findById(agendamento.getCliente().getId())
@@ -48,6 +51,7 @@ public class AgendamentoService {
         return agendamentoRepository.save(agendamento);
     }
 
+    //ATUALIZAR STATUS DO AGENDAMENTO
     public void atualizarStatus(Long id, StatusAgendamento statusAgendamento) {
         Agendamento agendamento = agendamentoRepository.findById(id)
                 .orElseThrow(() -> new BusinessException("agendamento não encontrado"));
@@ -62,11 +66,25 @@ public class AgendamentoService {
             agendamento.getCliente().setPontos(
                     agendamento.getCliente().getPontos() + pontosServico);
         }
-
         agendamento.setStatus(statusAgendamento);
         agendamentoRepository.save(agendamento);
+    }
 
 
+    //LISTAR TODOS AGENDAMENTOS
+    public List<AgendamentoResponseGestor> listarTodosAgendamentos(){
+        List <Agendamento> agendamentos = agendamentoRepository.findAll();
+
+        return agendamentos.stream()
+                .map(agendamento -> new AgendamentoResponseGestor(
+                        agendamento.getId(),
+                        agendamento.getCliente().getNome(),
+                        agendamento.getBarbeiro().getNome(),
+                        agendamento.getPreco(),
+                        agendamento.getDataHora(),
+                        agendamento.getStatus(),
+                        agendamento.getPontos()
+                )).toList();
     }
 
 }

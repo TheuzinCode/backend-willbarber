@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import projetoBarbearia.WillBaber.domain.barbeiro.dto.BarbeiroResponseDTO;
 import projetoBarbearia.WillBaber.service.BarbeiroService;
 
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,6 +31,7 @@ public class BarbeiroController {
     public ResponseEntity<List<BarbeiroResponseDTO>> listarTodosBarbeiro(){
         return ResponseEntity.ok(barbeiroService.listarAll());
     }
+
 
 
 

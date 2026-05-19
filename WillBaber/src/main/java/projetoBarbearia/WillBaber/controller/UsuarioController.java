@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import projetoBarbearia.WillBaber.Factory.UsersFactory;
 import projetoBarbearia.WillBaber.domain.users.Users;
 import projetoBarbearia.WillBaber.domain.users.dto.UsersDTO;
@@ -27,6 +28,34 @@ public class UsuarioController {
         usuarioService.criarUsuario(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(entity);
     }
+
+    @PostMapping(value = "/criarUsuario2", consumes = "multipart/form-data")
+    public ResponseEntity<?> criarUsuario(
+
+            @RequestPart("users") UsersDTO usersDTO,
+
+            @RequestPart(value = "imagem", required = false)
+            MultipartFile imagem
+
+    ) {
+
+        try {
+
+            Users usuarioCriado =
+                    usuarioService.criarUsuario2(usersDTO, imagem);
+
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(usuarioCriado);
+
+        } catch (Exception e) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(e.getMessage());
+        }
+    }
+
 
     @GetMapping("/listarTodos")
     public ResponseEntity<List<UsersDTO>>ListarTodos(){

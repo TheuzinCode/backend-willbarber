@@ -1,15 +1,16 @@
 package projetoBarbearia.WillBaber.domain.barbeiro;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import projetoBarbearia.WillBaber.domain.horarioTrabalho.HorarioTrabalho;
 import projetoBarbearia.WillBaber.domain.users.TipoUsers;
 import projetoBarbearia.WillBaber.domain.users.Users;
+import jakarta.persistence.Basic;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 
 import java.util.List;
 
@@ -18,6 +19,15 @@ import java.util.List;
 @Entity
 @Table(name = "Barbeiro")
 public class Barbeiro extends Users {
+
+
+    private String descricao;
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "BYTEA")
+    private byte[] imagem;
+
 
     public Barbeiro() {
     }
