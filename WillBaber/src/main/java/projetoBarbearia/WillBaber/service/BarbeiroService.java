@@ -72,7 +72,9 @@ public class BarbeiroService {
          return barbeiroRepository.findAll().stream()
                  .map(barbeiro -> new BarbeiroResponseDTO(
                          barbeiro.getId(),
-                         barbeiro.getNome()
+                         barbeiro.getNome(),
+                         barbeiro.getDescricao(),
+                         barbeiro.getImagem()
                  ))
                  .toList();
     }

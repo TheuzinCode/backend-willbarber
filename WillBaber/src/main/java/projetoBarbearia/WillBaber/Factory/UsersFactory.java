@@ -33,6 +33,7 @@ public class UsersFactory {
 
                     barbeiro.setHorarios(horarios);
                 }
+                barbeiro.setDescricao(dto.descricao());
                     return barbeiro;
 
 

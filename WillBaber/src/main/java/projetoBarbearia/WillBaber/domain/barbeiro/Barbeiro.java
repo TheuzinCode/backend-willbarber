@@ -23,11 +23,9 @@ public class Barbeiro extends Users {
 
     private String descricao;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @Column(columnDefinition = "BYTEA")
-    private byte[] imagem;
 
+    @Column(name = "imagem", columnDefinition = "BYTEA")
+    private byte[] imagem;
 
     public Barbeiro() {
     }

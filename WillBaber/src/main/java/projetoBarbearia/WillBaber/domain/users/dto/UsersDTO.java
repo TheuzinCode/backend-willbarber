@@ -13,6 +13,7 @@ public record UsersDTO(
         String senha,
         String cpf,
         String numero,
+        String descricao,
         TipoUsers tipo,
         List<HorarioTrabalhoDTO> horarios
 
@@ -32,6 +33,9 @@ public record UsersDTO(
                 users.getSenha(),
                 users.getCpf(),
                 users.getNumero(),
+                users instanceof Barbeiro barbeiro
+                        ? barbeiro.getDescricao()
+                        : null,
                 users.getTipo(),
                 horarioDTO
         );
