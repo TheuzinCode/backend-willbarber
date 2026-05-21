@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
 import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseCliente;
 import projetoBarbearia.WillBaber.domain.cliente.Cliente;
+import projetoBarbearia.WillBaber.domain.cliente.dto.ClienteAtualizarDTO;
 import projetoBarbearia.WillBaber.domain.cliente.dto.ClienteResponseDTO;
 import projetoBarbearia.WillBaber.domain.statusAgendamento.StatusAgendamento;
 import projetoBarbearia.WillBaber.exception.BusinessException;
@@ -110,6 +111,26 @@ public class ClienteService {
                 )).toList();
     }
 
+    public ClienteAtualizarDTO atualizarCLiente(Long id, ClienteAtualizarDTO clienteAtualizarDTO){
+        var entity = clienteRepository.findById(id).orElseThrow(() -> new BusinessException("usuario não encontrado"));
+
+        Cliente cliente = entity;
+
+        cliente.setNome(clienteAtualizarDTO.nomeCompleto());
+        cliente.setEmail(clienteAtualizarDTO.email());
+        cliente.setNumero(clienteAtualizarDTO.telefone());
+        cliente.setSenha(clienteAtualizarDTO.senha());
+
+
+        clienteRepository.save(cliente);
+
+        return new ClienteAtualizarDTO(
+                cliente.getNome(),
+                cliente.getEmail(),
+                cliente.getNumero(),
+                cliente.getSenha()
+        );
+    }
 
 
 }
