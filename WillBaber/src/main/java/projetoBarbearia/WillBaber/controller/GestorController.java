@@ -3,10 +3,7 @@ package projetoBarbearia.WillBaber.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseCliente;
 import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseGestor;
 import projetoBarbearia.WillBaber.domain.barbeiro.dto.BarbeiroResponseGestorDTO;
@@ -43,6 +40,13 @@ public class GestorController {
     @GetMapping("listar-todos-barbeiros")
     public ResponseEntity<List<BarbeiroResponseGestorDTO>> listarTodosBarbeiros(){
         return ResponseEntity.ok(gestorService.listarTodosBarbeiros());
+    }
+
+    @GetMapping("/meu-perfil/{id}")
+    public ResponseEntity<?> meuPerfilGestor(@PathVariable Long id){
+        var entity = gestorService.meuPerfilGestor(id);
+        return ResponseEntity.ok(entity);
+
     }
 
 

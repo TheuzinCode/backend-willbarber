@@ -7,9 +7,11 @@ import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseGestor;
 import projetoBarbearia.WillBaber.domain.barbeiro.dto.BarbeiroResponseGestorDTO;
 import projetoBarbearia.WillBaber.domain.cliente.Cliente;
 import projetoBarbearia.WillBaber.domain.cliente.dto.ClienteResponseDTO;
+import projetoBarbearia.WillBaber.domain.gestor.dto.GestorResponseDTO;
 import projetoBarbearia.WillBaber.domain.servico.dto.ServicoResponseDTO;
 import projetoBarbearia.WillBaber.repositories.AgendamentoRepository;
 import projetoBarbearia.WillBaber.repositories.ClienteRepository;
+import projetoBarbearia.WillBaber.repositories.GestorRepository;
 
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class GestorService {
     private AgendamentoService agendamentoService;
     private ServicoService servicoService;
     private BarbeiroService barbeiroService;
+    private GestorRepository gestorRepository;
 
     public List<ClienteResponseDTO> listarTodosClientes(){
         return clienteService.listarTodosClientes();
@@ -37,6 +40,15 @@ public class GestorService {
 
     public List<BarbeiroResponseGestorDTO> listarTodosBarbeiros(){
         return barbeiroService.listarTodosBarbeiros();
+    }
+
+    public GestorResponseDTO meuPerfilGestor(Long id){
+        var gestor = gestorRepository.findById(id);
+
+        return new GestorResponseDTO(gestor.get().getId(),
+                gestor.get().getNome(),
+                gestor.get().getEmail(),
+                gestor.get().getTipo());
     }
 
 

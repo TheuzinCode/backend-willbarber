@@ -39,4 +39,10 @@ public class ServicoController {
 
     }
 
+    @PutMapping("/editar-servico/{id}")
+    public ResponseEntity<?> editarServico(@PathVariable Long id ,@RequestBody ServicoRequestDTO servicoRequestDTO ){
+        var entity = servicoService.editarServico(id, servicoRequestDTO);
+        return ResponseEntity.ok(entity);
+    }
+
 }
