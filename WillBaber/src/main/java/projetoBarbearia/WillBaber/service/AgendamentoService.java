@@ -73,13 +73,14 @@ public class AgendamentoService {
 
     //LISTAR TODOS AGENDAMENTOS
     public List<AgendamentoResponseGestor> listarTodosAgendamentos(){
-        List <Agendamento> agendamentos = agendamentoRepository.findAll();
+        List <Agendamento> agendamentos = agendamentoRepository.findAllByOrderByIdDesc();
 
         return agendamentos.stream()
                 .map(agendamento -> new AgendamentoResponseGestor(
                         agendamento.getId(),
                         agendamento.getCliente().getNome(),
                         agendamento.getBarbeiro().getNome(),
+                        agendamento.getServico().getNomeServico(),
                         agendamento.getPreco(),
                         agendamento.getDataHora(),
                         agendamento.getStatus(),

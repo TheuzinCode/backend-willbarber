@@ -9,6 +9,7 @@ public record AgendamentoResponseGestor(
         Long id,
         String nomeCliente,
         String nomeBarbeiro,
+        String nomeServico,
         BigDecimal precoServico,
         LocalDateTime dataHora,
         StatusAgendamento statusAgendamento,
