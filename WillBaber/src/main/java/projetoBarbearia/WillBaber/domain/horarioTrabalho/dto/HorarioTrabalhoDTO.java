@@ -1,5 +1,7 @@
 package projetoBarbearia.WillBaber.domain.horarioTrabalho.dto;
 
+import lombok.Getter;
+import lombok.Setter;
 import projetoBarbearia.WillBaber.domain.horarioTrabalho.HorarioTrabalho;
 
 import java.time.DayOfWeek;

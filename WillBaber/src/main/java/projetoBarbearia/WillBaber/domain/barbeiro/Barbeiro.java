@@ -39,7 +39,7 @@ public class Barbeiro extends Users {
         return TipoUsers.BARBEIRO;
     }
 
-    @OneToMany(mappedBy = "barbeiro", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "barbeiro", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<HorarioTrabalho> horarios;
 
