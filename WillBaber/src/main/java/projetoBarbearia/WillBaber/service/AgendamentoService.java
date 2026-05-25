@@ -61,13 +61,13 @@ public class AgendamentoService {
         if(Boolean.TRUE.equals(
                 agendamento.getCorteGratis())){
 
-            if (cliente.getPontos() < servico.getPontos()){
+            if (cliente.getPontos() < agendamento.getPontos()){
                 throw new BusinessException(
                         "Cliente não possui pontos suficientes"
                 );
             }
 
-            cliente.setPontos(cliente.getPontos() - servico.getPontos());
+            cliente.setPontos(cliente.getPontos() - agendamento.getPontos());
 
             agendamento.setPreco(BigDecimal.ZERO);
 
