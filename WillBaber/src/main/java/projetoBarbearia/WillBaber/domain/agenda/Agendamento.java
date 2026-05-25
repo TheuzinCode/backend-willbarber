@@ -9,6 +9,7 @@ import projetoBarbearia.WillBaber.domain.barbeiro.Barbeiro;
 import projetoBarbearia.WillBaber.domain.cliente.Cliente;
 import projetoBarbearia.WillBaber.domain.servico.Servico;
 import projetoBarbearia.WillBaber.domain.statusAgendamento.StatusAgendamento;
+import projetoBarbearia.WillBaber.domain.tipoPagamento.TipoPagamento;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -53,7 +54,22 @@ public class Agendamento {
 
     private Integer pontos;
 
-    public Agendamento(LocalDateTime dataHora, BigDecimal preco, StatusAgendamento status, Barbeiro barbeiro, Cliente cliente, Servico servico, Integer pontos) {
+
+    private Boolean corteGratis = false;
+
+    @Enumerated(EnumType.STRING)
+    private TipoPagamento tipoPagamento = TipoPagamento.NORMAL;
+
+    public Agendamento(LocalDateTime dataHora,
+                       BigDecimal preco,
+                       StatusAgendamento status,
+                       Barbeiro barbeiro,
+                       Cliente cliente,
+                       Servico servico,
+                       Integer pontos,
+                       Boolean corteGratis,
+                       TipoPagamento tipoPagamento) {
+
         this.dataHora = dataHora;
         this.preco = preco;
         this.status = status;
@@ -61,6 +77,8 @@ public class Agendamento {
         this.cliente = cliente;
         this.servico = servico;
         this.pontos = pontos;
+        this.corteGratis = corteGratis;
+        this.tipoPagamento = tipoPagamento;
     }
 
     public Agendamento() {

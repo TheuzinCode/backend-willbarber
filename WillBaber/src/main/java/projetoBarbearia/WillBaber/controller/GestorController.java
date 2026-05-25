@@ -46,7 +46,6 @@ public class GestorController {
     public ResponseEntity<?> meuPerfilGestor(@PathVariable Long id){
         var entity = gestorService.meuPerfilGestor(id);
         return ResponseEntity.ok(entity);
-
     }
 
 

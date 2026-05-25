@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
+import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoRecompensaDTO;
 import projetoBarbearia.WillBaber.domain.statusAgendamento.StatusAgendamento;
 import projetoBarbearia.WillBaber.service.AgendamentoService;
 

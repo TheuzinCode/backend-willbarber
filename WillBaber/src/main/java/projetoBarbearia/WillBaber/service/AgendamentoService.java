@@ -4,17 +4,18 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
+import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoRecompensaDTO;
 import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseGestor;
 import projetoBarbearia.WillBaber.domain.barbeiro.Barbeiro;
 import projetoBarbearia.WillBaber.domain.cliente.Cliente;
 import projetoBarbearia.WillBaber.domain.horarioTrabalho.HorarioTrabalho;
+import projetoBarbearia.WillBaber.domain.servico.Servico;
 import projetoBarbearia.WillBaber.domain.statusAgendamento.StatusAgendamento;
+import projetoBarbearia.WillBaber.domain.tipoPagamento.TipoPagamento;
 import projetoBarbearia.WillBaber.exception.BusinessException;
-import projetoBarbearia.WillBaber.repositories.AgendamentoRepository;
-import projetoBarbearia.WillBaber.repositories.BarbeiroRepository;
-import projetoBarbearia.WillBaber.repositories.ClienteRepository;
-import projetoBarbearia.WillBaber.repositories.HorarioTabalhoRepository;
+import projetoBarbearia.WillBaber.repositories.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -26,6 +27,7 @@ public class AgendamentoService {
     private ClienteRepository clienteRepository;
     private BarbeiroRepository barbeiroRepository;
     private HorarioTabalhoRepository horarioTrabalhoRepository;
+    private ServicoRepository servicoRepository;
 
 
     //SALVAR O AGENDAMENTO
@@ -44,12 +46,55 @@ public class AgendamentoService {
             throw new BusinessException("Horário já está ocupado");
         }
 
+        Servico servico = servicoRepository.findById(
+                agendamento.getServico().getId()
+        ).orElseThrow(() ->
+                new BusinessException("Serviço não encontrado"));
+
+        agendamento.setServico(servico);
+
         agendamento.setBarbeiro(barbeiro);
         agendamento.setCliente(cliente);
         agendamento.setStatus(StatusAgendamento.AGENDADO);
 
+
+        if(Boolean.TRUE.equals(
+                agendamento.getCorteGratis())){
+
+            if (cliente.getPontos() < servico.getPontos()){
+                throw new BusinessException(
+                        "Cliente não possui pontos suficientes"
+                );
+            }
+
+            cliente.setPontos(cliente.getPontos() - servico.getPontos());
+
+            agendamento.setPreco(BigDecimal.ZERO);
+
+            agendamento.setTipoPagamento(
+                    TipoPagamento.RECOMPENSA
+            );
+        }
+
+        else {
+            agendamento.setCorteGratis(false);
+
+            agendamento.setPreco(
+                    servico.getPreco()
+            );
+
+            agendamento.setTipoPagamento(
+                    TipoPagamento.NORMAL
+            );
+        }
+
+
+        clienteRepository.save(cliente);
+
+
         return agendamentoRepository.save(agendamento);
     }
+
 
     //ATUALIZAR STATUS DO AGENDAMENTO
     public void atualizarStatus(Long id, StatusAgendamento statusAgendamento) {
