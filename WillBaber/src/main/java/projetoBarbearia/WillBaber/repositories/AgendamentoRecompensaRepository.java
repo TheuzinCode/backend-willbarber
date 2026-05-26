@@ -20,4 +20,6 @@ public interface AgendamentoRecompensaRepository extends JpaRepository<Agendamen
             LocalDateTime inicio,
             LocalDateTime fim
     );
+
+    List<AgendamentoRecompensa> findByClienteIdOrderByIdDesc(Long id);
 }

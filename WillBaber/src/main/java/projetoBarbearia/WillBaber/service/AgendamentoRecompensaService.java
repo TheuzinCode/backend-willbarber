@@ -3,6 +3,7 @@ package projetoBarbearia.WillBaber.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import projetoBarbearia.WillBaber.domain.agenda.AgendamentoRecompensa;
+import projetoBarbearia.WillBaber.domain.agenda.agRecomDTO.AgendamentoRecompensaResponseDTO;
 import projetoBarbearia.WillBaber.domain.barbeiro.Barbeiro;
 import projetoBarbearia.WillBaber.domain.cliente.Cliente;
 import projetoBarbearia.WillBaber.domain.recompensa.Recompensa;
@@ -12,6 +13,7 @@ import projetoBarbearia.WillBaber.exception.BusinessException;
 import projetoBarbearia.WillBaber.repositories.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -60,21 +62,11 @@ public class AgendamentoRecompensaService {
         agendamentoRecompensa.setTipoPagamento(
                 TipoPagamento.RECOMPENSA
         );
-
-        agendamentoRecompensa.setStatus(
+        agendamentoRecompensa.setStatusRecompensa(
                 StatusAgendamento.AGENDADO
         );
 
         if (cliente.getPontos() < recompensa.getPontos()) {
-            System.out.println(
-                    "Pontos cliente: " +
-                            cliente.getPontos()
-            );
-
-            System.out.println(
-                    "Pontos recompensa: " +
-                            recompensa.getPontos()
-            );
             throw new BusinessException(
                     "Cliente não possui pontos suficientes"
             );
@@ -85,5 +77,18 @@ public class AgendamentoRecompensaService {
 
         return agendamentoRecompensaRepository.save(agendamentoRecompensa);
 
+    }
+
+    public List<AgendamentoRecompensaResponseDTO> listarTodosAgendamentosRecompensa(Long id){
+        List<AgendamentoRecompensa> agendamentoRecompensas = agendamentoRecompensaRepository.findByClienteIdOrderByIdDesc(id);
+
+        return agendamentoRecompensas
+                .stream().map(agendamentoRecompensa -> new AgendamentoRecompensaResponseDTO(
+                agendamentoRecompensa.getId(),
+                agendamentoRecompensa.getRecompensa().getNomeRecompensa(),
+                agendamentoRecompensa.getBarbeiro().getNome(),
+                agendamentoRecompensa.getDataHora(),
+                agendamentoRecompensa.getStatusRecompensa()
+        )).toList();
     }
 }

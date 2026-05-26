@@ -31,9 +31,6 @@ public class AgendamentoRecompensa {
 
     private LocalDateTime dataHora;
 
-    @Enumerated(EnumType.STRING)
-    private StatusAgendamento status = StatusAgendamento.AGENDADO;
-
     @CreationTimestamp
     private Instant creationTimestamp;
 
