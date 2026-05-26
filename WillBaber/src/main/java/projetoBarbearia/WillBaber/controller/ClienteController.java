@@ -48,6 +48,11 @@ public class ClienteController {
         return ResponseEntity.ok(entity);
     }
 
+    @GetMapping("/listar-todos-Clientes")
+    public ResponseEntity<?> listarTodosCliente (){
+        return ResponseEntity.ok(clienteService.listarTodosClientes());
+    }
+
 
     //TODO
     //PONTOS
