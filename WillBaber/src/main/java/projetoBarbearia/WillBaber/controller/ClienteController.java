@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseCliente;
 import projetoBarbearia.WillBaber.domain.cliente.dto.ClienteAtualizarDTO;
 import projetoBarbearia.WillBaber.domain.cliente.dto.ClienteResponseDTO;
+import projetoBarbearia.WillBaber.domain.cliente.dto.RankingClienteDTO;
 import projetoBarbearia.WillBaber.service.ClienteService;
 
 import java.util.List;
@@ -51,6 +52,16 @@ public class ClienteController {
     @GetMapping("/listar-todos-Clientes")
     public ResponseEntity<?> listarTodosCliente (){
         return ResponseEntity.ok(clienteService.listarTodosClientes());
+    }
+
+    @GetMapping("/ranking-clientes")
+    public ResponseEntity<List<RankingClienteDTO>>
+    rankingClientes(){
+
+        return ResponseEntity.ok(
+                clienteService
+                        .listarRankingClientes()
+        );
     }
 
 

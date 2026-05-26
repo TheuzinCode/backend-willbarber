@@ -8,14 +8,18 @@ import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseCliente;
 import projetoBarbearia.WillBaber.domain.cliente.Cliente;
 import projetoBarbearia.WillBaber.domain.cliente.dto.ClienteAtualizarDTO;
 import projetoBarbearia.WillBaber.domain.cliente.dto.ClienteResponseDTO;
+import projetoBarbearia.WillBaber.domain.cliente.dto.RankingClienteDTO;
 import projetoBarbearia.WillBaber.domain.statusAgendamento.StatusAgendamento;
 import projetoBarbearia.WillBaber.exception.BusinessException;
 import projetoBarbearia.WillBaber.repositories.AgendamentoRepository;
 import projetoBarbearia.WillBaber.repositories.BarbeiroRepository;
 import projetoBarbearia.WillBaber.repositories.ClienteRepository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -130,6 +134,42 @@ public class ClienteService {
                 cliente.getNumero(),
                 cliente.getSenha()
         );
+    }
+
+    public List<RankingClienteDTO>
+    listarRankingClientes() {
+
+        List<Agendamento> agendamentos =
+                agendamentoRepository.findAll();
+
+        Map<Cliente, Long> ranking =
+                agendamentos.stream()
+
+                        .collect(Collectors.groupingBy(
+                                Agendamento::getCliente,
+                                Collectors.counting()
+                        ));
+
+        return ranking.entrySet()
+                .stream()
+
+                .map(entry -> new RankingClienteDTO(
+
+                        entry.getKey().getId(),
+
+                        entry.getKey().getNome(),
+
+                        entry.getValue()
+
+                ))
+
+                .sorted(
+                        Comparator.comparing(
+                                RankingClienteDTO::quantidadeCortes
+                        ).reversed()
+                )
+
+                .toList();
     }
 
 
