@@ -52,9 +52,11 @@ public class BarbeiroService {
         List<Agendamento> agendamentos = agendamentoRepository
                 .findByBarbeiroIdAndDataHoraBetween(barbeiroId, inicioDia, fimDia);
 
+
         List<LocalDateTime> ocupados = agendamentos.stream()
                 .map(Agendamento::getDataHora)
                 .toList();
+
 
 
         LocalDateTime horario = data.atTime(horarioTrabalho.getHorarioInicio());

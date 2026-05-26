@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import projetoBarbearia.WillBaber.domain.barbeiro.Barbeiro;
+import projetoBarbearia.WillBaber.domain.cliente.Cliente;
+import projetoBarbearia.WillBaber.domain.servico.Servico;
 
 @Entity
 @Table(name = "recompenasas")
@@ -30,6 +33,5 @@ public class Recompensa {
     @NotNull(message = "A quantidade de pontos é obrigatória.")
     @PositiveOrZero(message = "Os pontos não podem ser negativos.")
     private Integer pontos;
-
 
 }

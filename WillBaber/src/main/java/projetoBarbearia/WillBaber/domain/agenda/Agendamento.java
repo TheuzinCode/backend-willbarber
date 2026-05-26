@@ -54,9 +54,6 @@ public class Agendamento {
 
     private Integer pontos;
 
-
-    private Boolean corteGratis = false;
-
     @Enumerated(EnumType.STRING)
     private TipoPagamento tipoPagamento = TipoPagamento.NORMAL;
 
@@ -67,7 +64,6 @@ public class Agendamento {
                        Cliente cliente,
                        Servico servico,
                        Integer pontos,
-                       Boolean corteGratis,
                        TipoPagamento tipoPagamento) {
 
         this.dataHora = dataHora;
@@ -77,7 +73,6 @@ public class Agendamento {
         this.cliente = cliente;
         this.servico = servico;
         this.pontos = pontos;
-        this.corteGratis = corteGratis;
         this.tipoPagamento = tipoPagamento;
     }
 

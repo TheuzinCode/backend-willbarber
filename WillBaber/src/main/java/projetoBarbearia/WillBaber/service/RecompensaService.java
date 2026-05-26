@@ -2,10 +2,16 @@ package projetoBarbearia.WillBaber.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import projetoBarbearia.WillBaber.domain.agenda.AgendamentoRecompensa;
+import projetoBarbearia.WillBaber.domain.barbeiro.Barbeiro;
+import projetoBarbearia.WillBaber.domain.cliente.Cliente;
 import projetoBarbearia.WillBaber.domain.recompensa.Recompensa;
 import projetoBarbearia.WillBaber.domain.recompensa.dto.NovaRecompensaDTO;
 import projetoBarbearia.WillBaber.domain.recompensa.dto.NovaRecompensaResponseDTO;
 import projetoBarbearia.WillBaber.exception.BusinessException;
+import projetoBarbearia.WillBaber.repositories.AgendamentoRepository;
+import projetoBarbearia.WillBaber.repositories.BarbeiroRepository;
+import projetoBarbearia.WillBaber.repositories.ClienteRepository;
 import projetoBarbearia.WillBaber.repositories.RecompensasRepository;
 
 import java.util.List;
@@ -14,6 +20,9 @@ import java.util.List;
 @AllArgsConstructor
 public class RecompensaService {
 
+    private AgendamentoRepository agendamentoRepository;
+    private ClienteRepository clienteRepository;
+    private BarbeiroRepository barbeiroRepository;
     private RecompensasRepository recompensasRepository;
 
     public NovaRecompensaResponseDTO salvarNovaRecompensa(NovaRecompensaDTO novaRecompensaDTO){
