@@ -56,38 +56,7 @@ public class AgendamentoService {
         agendamento.setBarbeiro(barbeiro);
         agendamento.setCliente(cliente);
         agendamento.setStatus(StatusAgendamento.AGENDADO);
-
-
-        if(Boolean.TRUE.equals(
-                agendamento.getCorteGratis())){
-
-            if (cliente.getPontos() < agendamento.getPontos()){
-                throw new BusinessException(
-                        "Cliente não possui pontos suficientes"
-                );
-            }
-
-            cliente.setPontos(cliente.getPontos() - agendamento.getPontos());
-
-            agendamento.setPreco(BigDecimal.ZERO);
-
-            agendamento.setTipoPagamento(
-                    TipoPagamento.RECOMPENSA
-            );
-        }
-
-        else {
-            agendamento.setCorteGratis(false);
-
-            agendamento.setPreco(
-                    servico.getPreco()
-            );
-
-            agendamento.setTipoPagamento(
-                    TipoPagamento.NORMAL
-            );
-        }
-
+        agendamento.setTipoPagamento(TipoPagamento.NORMAL);
 
         clienteRepository.save(cliente);
 

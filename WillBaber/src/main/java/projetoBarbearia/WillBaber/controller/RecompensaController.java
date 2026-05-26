@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/Willbarber")
+@RequestMapping("/willbarber")
 public class RecompensaController {
 
     @Autowired

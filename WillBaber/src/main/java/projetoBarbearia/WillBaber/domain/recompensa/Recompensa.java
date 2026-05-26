@@ -30,4 +30,6 @@ public class Recompensa {
     @NotNull(message = "A quantidade de pontos é obrigatória.")
     @PositiveOrZero(message = "Os pontos não podem ser negativos.")
     private Integer pontos;
+
+
 }
