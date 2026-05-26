@@ -65,7 +65,7 @@ public class AgendamentoRecompensaService {
                 StatusAgendamento.AGENDADO
         );
 
-        if (cliente.getPontos() > recompensa.getPontos()) {
+        if (cliente.getPontos() < recompensa.getPontos()) {
             System.out.println(
                     "Pontos cliente: " +
                             cliente.getPontos()

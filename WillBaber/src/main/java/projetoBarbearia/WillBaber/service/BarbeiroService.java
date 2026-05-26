@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
+import projetoBarbearia.WillBaber.domain.agenda.AgendamentoRecompensa;
 import projetoBarbearia.WillBaber.domain.barbeiro.Barbeiro;
 import projetoBarbearia.WillBaber.domain.barbeiro.dto.BarbeiroResponseDTO;
 import projetoBarbearia.WillBaber.domain.barbeiro.dto.BarbeiroResponseGestorDTO;
 import projetoBarbearia.WillBaber.domain.horarioTrabalho.HorarioTrabalho;
 import projetoBarbearia.WillBaber.domain.horarioTrabalho.dto.HorarioTrabalhoDTO;
 import projetoBarbearia.WillBaber.exception.BusinessException;
+import projetoBarbearia.WillBaber.repositories.AgendamentoRecompensaRepository;
 import projetoBarbearia.WillBaber.repositories.AgendamentoRepository;
 import projetoBarbearia.WillBaber.repositories.BarbeiroRepository;
 import projetoBarbearia.WillBaber.repositories.HorarioTabalhoRepository;
@@ -34,6 +36,9 @@ public class BarbeiroService {
     @Autowired
     private AgendamentoRepository agendamentoRepository;
 
+    @Autowired
+    private AgendamentoRecompensaRepository agendamentoRecompensaRepository;
+
     public List<LocalDateTime> listarHorariosDisponiveis(Long barbeiroId, LocalDate data) {
 
         DayOfWeek diaSemana = data.getDayOfWeek();
@@ -52,10 +57,17 @@ public class BarbeiroService {
         List<Agendamento> agendamentos = agendamentoRepository
                 .findByBarbeiroIdAndDataHoraBetween(barbeiroId, inicioDia, fimDia);
 
-
         List<LocalDateTime> ocupados = agendamentos.stream()
                 .map(Agendamento::getDataHora)
                 .toList();
+
+        List <AgendamentoRecompensa> agendamentoRecompensas = agendamentoRecompensaRepository
+                .findByBarbeiroIdAndDataHoraBetween(barbeiroId, inicioDia, fimDia);
+
+        List<LocalDateTime> ocupadosRecompensa = agendamentoRecompensas.stream()
+                .map(AgendamentoRecompensa::getDataHora)
+                .toList();
+
 
 
 
@@ -66,7 +78,7 @@ public class BarbeiroService {
 
         while (horario.isBefore(fimExpediente)) {
 
-            if (!ocupados.contains(horario)) {
+            if (!ocupados.contains(horario) && !ocupadosRecompensa.contains(horario)) {
                 disponiveis.add(horario);
             }
 
