@@ -74,7 +74,9 @@ public class AgendamentoService {
             throw new BusinessException("status do agendamento vazio");
         }
 
-        if (statusAgendamento == StatusAgendamento.FINALIZADO) {
+
+        if (statusAgendamento == StatusAgendamento.FINALIZADO &&
+                agendamento.getStatus() != StatusAgendamento.FINALIZADO) {
 
             int pontosServico = agendamento.getServico().getPontos();
             agendamento.getCliente().setPontos(
