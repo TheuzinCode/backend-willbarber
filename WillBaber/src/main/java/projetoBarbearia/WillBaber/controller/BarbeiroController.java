@@ -51,6 +51,14 @@ public class BarbeiroController {
         return ResponseEntity.ok(entity);
     }
 
+    @GetMapping("/barbeiro/meu-perfil/{id}")
+    public ResponseEntity<?> procurarPorId (@PathVariable Long id){
+        var enttity = barbeiroService.buscarPorId(id);
+        return ResponseEntity.ok(enttity);
+
+
+    }
+
 
 
 

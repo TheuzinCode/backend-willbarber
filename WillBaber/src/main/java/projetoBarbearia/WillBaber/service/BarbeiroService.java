@@ -173,4 +173,18 @@ public class BarbeiroService {
         );
     }
 
+    public BarbeiroResponseDTO buscarPorId(Long id){
+
+        Barbeiro barbeiroOpt = barbeiroRepository.findById(id).orElseThrow(() -> new BusinessException("BARBEIRO NÃO ENCONTRADO"));
+
+        return new BarbeiroResponseDTO(
+                barbeiroOpt.getId(),
+                barbeiroOpt.getNome(),
+                barbeiroOpt.getDescricao(),
+                barbeiroOpt.getImagem()
+        );
+
+
+    }
+
 }
