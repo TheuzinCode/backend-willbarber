@@ -55,8 +55,16 @@ public class BarbeiroController {
     public ResponseEntity<?> procurarPorId (@PathVariable Long id){
         var enttity = barbeiroService.buscarPorId(id);
         return ResponseEntity.ok(enttity);
+    }
 
+    @GetMapping("/barbeiro/{id}/listarAgedamentosDoDia")
+    public ResponseEntity<?> listarAgendamentosDia(@PathVariable Long id, @RequestParam LocalDate data){
+        return ResponseEntity.ok(barbeiroService.buscarAgendamentoDoDia(id, data));
+    }
 
+    @GetMapping("/barbeiro/{id}/meu-perfil")
+    public ResponseEntity<?> buscarMeuPerfil(@PathVariable Long id){
+        return ResponseEntity.ok(barbeiroService.buscarMeuPerfilBarbeiro(id));
     }
 
 

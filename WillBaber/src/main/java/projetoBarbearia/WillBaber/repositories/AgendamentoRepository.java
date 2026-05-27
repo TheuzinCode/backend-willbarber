@@ -33,8 +33,10 @@ public interface AgendamentoRepository extends JpaRepository <Agendamento, Long>
     );
 
     List<Agendamento>
-    findByBarbeiroIdOrderByDataHoraDesc(
-            Long barbeiroId
+    findByBarbeiroIdAndDataHoraBetweenOrderByDataHoraDesc(
+            Long clienteId,
+            LocalDateTime inicio,
+            LocalDateTime fim
     );
 
 }

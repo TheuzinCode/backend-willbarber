@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
 import projetoBarbearia.WillBaber.domain.agenda.AgendamentoRecompensa;
+import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseBarbeiro;
 import projetoBarbearia.WillBaber.domain.barbeiro.Barbeiro;
+import projetoBarbearia.WillBaber.domain.barbeiro.dto.BarbeiroMeuPerfilDTO;
 import projetoBarbearia.WillBaber.domain.barbeiro.dto.BarbeiroResponseDTO;
 import projetoBarbearia.WillBaber.domain.barbeiro.dto.BarbeiroResponseGestorDTO;
 import projetoBarbearia.WillBaber.domain.horarioTrabalho.HorarioTrabalho;
@@ -21,6 +23,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -128,7 +131,9 @@ public class BarbeiroService {
 
         barbeiro.setNome(barbeiroResponseGestorDTO.nome());
         barbeiro.setDescricao(barbeiroResponseGestorDTO.descricao());
-        barbeiro.setSenha(barbeiroResponseGestorDTO.senha());
+        if (barbeiroResponseGestorDTO.senha() != null && !barbeiroResponseGestorDTO.senha().isEmpty()){
+            barbeiro.setSenha(barbeiroResponseGestorDTO.senha());
+        }
         if (imagem != null && !imagem.isEmpty()) {
             barbeiro.setImagem(imagem.getBytes());
         }
@@ -187,4 +192,47 @@ public class BarbeiroService {
 
     }
 
+    public List<AgendamentoResponseBarbeiro> buscarAgendamentoDoDia(Long id, LocalDate data){
+
+        LocalDateTime inicio =
+                data.atStartOfDay();
+
+        LocalDateTime fim =
+                data.atTime(23, 59, 59);
+
+        List <Agendamento> agendamentos = agendamentoRepository
+                .findByBarbeiroIdAndDataHoraBetweenOrderByDataHoraDesc( id,
+                inicio,
+                fim);
+
+        return agendamentos
+                .stream()
+                .map(agendamento -> new AgendamentoResponseBarbeiro(
+                        agendamento.getId(),
+                        agendamento.getCliente().getNome(),
+                        agendamento.getServico().getNomeServico(),
+                        agendamento.getServico().getTempoServico(),
+                        agendamento.getDataHora(),
+                        agendamento.getPreco(),
+                        agendamento.getStatus()
+                )).toList();
+    }
+
+    public BarbeiroMeuPerfilDTO buscarMeuPerfilBarbeiro(Long id){
+        Barbeiro barbeiro = barbeiroRepository.findById(id).orElseThrow(() -> new BusinessException("BARBEIRO NÃO ENCONTRADO"));
+
+        return new BarbeiroMeuPerfilDTO(
+                barbeiro.getId(),
+                barbeiro.getNome(),
+                barbeiro.getDescricao(),
+                barbeiro.getNumero(),
+                barbeiro.getCpf(),
+                barbeiro.getEmail(),
+                barbeiro.getImagem(),
+                barbeiro.getHorarios()
+                        .stream()
+                        .map(HorarioTrabalhoDTO::new)
+                        .toList()
+        );
+    }
 }
