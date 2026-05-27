@@ -6,6 +6,7 @@ import projetoBarbearia.WillBaber.domain.agenda.AgendamentoRecompensa;
 import projetoBarbearia.WillBaber.domain.barbeiro.Barbeiro;
 import projetoBarbearia.WillBaber.domain.cliente.Cliente;
 import projetoBarbearia.WillBaber.domain.recompensa.Recompensa;
+import projetoBarbearia.WillBaber.domain.recompensa.dto.MInhasRecompensasDTO;
 import projetoBarbearia.WillBaber.domain.recompensa.dto.NovaRecompensaDTO;
 import projetoBarbearia.WillBaber.domain.recompensa.dto.NovaRecompensaResponseDTO;
 import projetoBarbearia.WillBaber.exception.BusinessException;
@@ -63,4 +64,5 @@ public class RecompensaService {
                 )
         ).toList();
     }
+
 }

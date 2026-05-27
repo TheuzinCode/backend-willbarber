@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import projetoBarbearia.WillBaber.domain.recompensa.dto.MInhasRecompensasDTO;
 import projetoBarbearia.WillBaber.domain.recompensa.dto.NovaRecompensaDTO;
 import projetoBarbearia.WillBaber.domain.recompensa.dto.NovaRecompensaResponseDTO;
 import projetoBarbearia.WillBaber.service.RecompensaService;
