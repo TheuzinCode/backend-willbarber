@@ -1,6 +1,7 @@
 package projetoBarbearia.WillBaber.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import projetoBarbearia.WillBaber.Factory.UsersFactory;
@@ -18,6 +19,8 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -36,6 +39,10 @@ public class UsuarioService {
             System.out.println("EMAIL CADASTRADO");
             throw new EmailJaCadastradoException("Email já cadastrado");
         }
+
+        String senhaCriptografada =  passwordEncoder.encode(users.getSenha());
+
+        users.setSenha(senhaCriptografada);
 
         return usuarioRepository.save(users);
     }
