@@ -77,6 +77,10 @@ public class UsuarioService {
             barbeiro.setImagem(imagem.getBytes());
         }
 
+        String senhaCriptografada =  passwordEncoder.encode(entity.getSenha());
+
+        entity.setSenha(senhaCriptografada);
+
         return usuarioRepository.save(entity);
     }
 

@@ -2,6 +2,7 @@ package projetoBarbearia.WillBaber.service;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import projetoBarbearia.WillBaber.domain.Login.dto.LoginRequestDTO;
 import projetoBarbearia.WillBaber.domain.Login.dto.LoginResponseDTO;
@@ -28,15 +29,24 @@ public class LoginService {
 
     private GestorRepository gestorRepository;
 
+    private PasswordEncoder passwordEncoder;
+
 
 
     public LoginResponseDTO verificarLogin(LoginRequestDTO loginDTO){
         Users optLogin = usuarioRepository.findByEmail(loginDTO.email())
                 .orElseThrow(() -> new BusinessException("EMAIL NÃO ENCONTRADO") );
 
-        if (!optLogin.getSenha().equals(loginDTO.senha())){
-            throw new BusinessException("USUARIO OU SENHA INCORRETA");
+        boolean valid = passwordEncoder.matches(
+                loginDTO.senha(),
+                optLogin.getSenha());
+
+        if (!valid){
+            throw new BusinessException(
+                    "USUARIO OU SENHA INCORRETA"
+            );
         }
+
         if (optLogin.getTipo() == TipoUsers.CLIENTE){
             var cliente = clienteRepository.findById(optLogin.getId()).orElseThrow(() -> new BusinessException("CLIENTE NÃO ENCONTRADO"));
             LoginResponseDTO  loginResponseDTO = new LoginResponseDTO(optLogin.getId(), optLogin.getNome(), optLogin.getEmail(), cliente.getPontos(), cliente.getTipo());
