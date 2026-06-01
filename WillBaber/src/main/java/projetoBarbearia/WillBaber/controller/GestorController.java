@@ -4,7 +4,6 @@ package projetoBarbearia.WillBaber.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseCliente;
 import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseGestor;
 import projetoBarbearia.WillBaber.domain.barbeiro.dto.BarbeiroResponseGestorDTO;
 import projetoBarbearia.WillBaber.domain.cliente.dto.ClienteResponseDTO;
@@ -54,7 +53,4 @@ public class GestorController {
         barbeiroService.deletarBarbeiro(id);
         return ResponseEntity.noContent().build();
     }
-
-
-
 }

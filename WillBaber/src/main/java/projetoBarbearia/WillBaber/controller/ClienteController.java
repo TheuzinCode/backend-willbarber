@@ -65,8 +65,5 @@ public class ClienteController {
     }
 
 
-    //TODO
-    //PONTOS
-    //PERFIL
 
 }
