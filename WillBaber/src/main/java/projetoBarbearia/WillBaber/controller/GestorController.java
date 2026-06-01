@@ -9,6 +9,7 @@ import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseGestor;
 import projetoBarbearia.WillBaber.domain.barbeiro.dto.BarbeiroResponseGestorDTO;
 import projetoBarbearia.WillBaber.domain.cliente.dto.ClienteResponseDTO;
 import projetoBarbearia.WillBaber.domain.servico.dto.ServicoResponseDTO;
+import projetoBarbearia.WillBaber.service.BarbeiroService;
 import projetoBarbearia.WillBaber.service.GestorService;
 
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
 public class GestorController {
 
     private GestorService gestorService;
-
+    private BarbeiroService barbeiroService;
 
     @GetMapping("/listar-todos-cliente")
     public ResponseEntity<List<ClienteResponseDTO>> listarTodosCliente(){
@@ -46,6 +47,12 @@ public class GestorController {
     public ResponseEntity<?> meuPerfilGestor(@PathVariable Long id){
         var entity = gestorService.meuPerfilGestor(id);
         return ResponseEntity.ok(entity);
+    }
+
+    @DeleteMapping("/barbeiros/deletar-barbeiro/{id}")
+    public ResponseEntity<Void> deletarBarbeiro(@PathVariable Long id) {
+        barbeiroService.deletarBarbeiro(id);
+        return ResponseEntity.noContent().build();
     }
 
 

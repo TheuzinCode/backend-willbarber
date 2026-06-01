@@ -1,6 +1,7 @@
 package projetoBarbearia.WillBaber.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
 import projetoBarbearia.WillBaber.domain.agenda.dto.AgendamentoResponseGestor;
@@ -50,8 +51,5 @@ public class GestorService {
                 gestor.get().getEmail(),
                 gestor.get().getTipo());
     }
-
-
-
 
 }

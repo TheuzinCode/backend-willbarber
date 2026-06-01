@@ -1,6 +1,7 @@
 package projetoBarbearia.WillBaber.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import projetoBarbearia.WillBaber.domain.agenda.Agendamento;
@@ -234,5 +235,11 @@ public class BarbeiroService {
                         .map(HorarioTrabalhoDTO::new)
                         .toList()
         );
+    }
+
+    public void deletarBarbeiro(Long id) {
+        Barbeiro barbeiroOpt = barbeiroRepository.findById(id)
+                .orElseThrow(()-> new BusinessException("Barbeiro não encontrado"));
+       barbeiroRepository.delete(barbeiroOpt);
     }
 }
